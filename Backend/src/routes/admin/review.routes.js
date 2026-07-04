@@ -3,10 +3,10 @@ import {
     getAllReviews,
     approveReview,
     deleteReview,
-} from "../controllers/review.controller.js";
+} from "../../controllers/admin/review.controller.js";
 
-import { authenticateuser} from "../middleware/auth.middleware.js";
-import { isAdmin } from "../middleware/admin.middleware.js";
+import { authenticateuser} from "../../middleware/auth/auth.middleware.js";
+import { isAdmin } from "../../middleware/admin/admin.middleware.js";
 
 const router = express.Router();
 

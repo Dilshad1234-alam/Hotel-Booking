@@ -1,14 +1,14 @@
 import express from 'express'
 import cors from 'cors'
 import cookieParser from 'cookie-parser'
-import authRouter from './routes/auth.routes.js'
-import adminRouter from './routes/admin.routes.js'
-import hotelRouter from './routes/hotel.routers.js'
-import roomRouter  from './routes/room.routes.js'
-import paymentRouter from "./routes/payment.routes.js";
-import reviewRouter from "./routes/review.routes.js";
-import bookingRouter from "./routes/booking.routes.js";
-import uploadRouter from "./routes/upload.routes.js"
+import authRouter from './routes/auth/auth.routes.js'
+import adminRouter from './routes/admin/admin.routes.js'
+import hotelRouter from './routes/admin/hotel.routers.js'
+import roomRouter  from './routes/admin/room.routes.js'
+import paymentRouter from "./routes/admin/payment.routes.js";
+import reviewRouter from "./routes/admin/review.routes.js";
+import bookingRouter from "./routes/admin/booking.routes.js";
+import uploadRouter from "./routes/admin/upload.routes.js"
 
 
 const app = express()

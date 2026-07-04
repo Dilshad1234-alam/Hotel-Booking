@@ -1,6 +1,6 @@
 import express from 'express'
-import { getMe, login, logout, register } from '../controllers/auth.controller.js'
-import { authenticateuser } from '../middleware/auth.middleware.js'
+import { getMe, login, logout, register } from '../../controllers/auth/auth.controller.js'
+import { authenticateuser } from '../../middleware/auth/auth.middleware.js'
 import { validateLoginUser, validateRegisterUser } from '../../validator/auth/auth.validator.js'
 
 

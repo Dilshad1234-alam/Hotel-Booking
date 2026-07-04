@@ -5,10 +5,10 @@ import {
     getRoomById,
     updateRoom,
     deleteRoom,
-} from "../controllers/room.controller.js";
+} from "../../controllers/admin/room.controller.js";
 
-import { authenticateuser } from "../middleware/auth.middleware.js";
-import { isAdmin } from "../middleware/admin.middleware.js";
+import { authenticateuser } from "../../middleware/auth/auth.middleware.js";
+import { isAdmin } from "../../middleware/admin/admin.middleware.js";
 
 const router = express.Router();
 

@@ -1,4 +1,4 @@
-import { authenticateuser } from '../middleware/auth.middleware.js'
+import { authenticateuser } from '../../middleware/auth/auth.middleware.js'
 
 export const isAdmin = (req, res, next) => {
 

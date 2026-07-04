@@ -3,10 +3,10 @@ import {
     getAllBookings,
     updateBookingStatus,
     createBooking
-} from "../controllers/booking.controller.js";
+} from "../../controllers/admin/booking.controller.js";
 
-import { authenticateuser } from "../middleware/auth.middleware.js";
-import { isAdmin } from "../middleware/admin.middleware.js";
+import { authenticateuser } from "../../middleware/auth/auth.middleware.js";
+import { isAdmin } from "../../middleware/admin/admin.middleware.js";
 
 const router = express.Router();
 

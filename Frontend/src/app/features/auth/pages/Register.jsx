@@ -50,9 +50,9 @@ const Register = () => {
     try {
       const user = await handleRegister(formData);
 
-      console.log("Backend response:", user);
+      // console.log("Backend response:", user);
 
-      toast.success("Successfully registered!");
+      // toast.success("Successfully registered!");
 
       setTimeout(() => {
         navigate("/login");

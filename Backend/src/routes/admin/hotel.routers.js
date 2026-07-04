@@ -1,7 +1,7 @@
 import express from "express";
-import { createHotel, getAllHotels, getHotelById, updateHotel, deleteHotel, } from "../controllers/hotel.controller.js";
-import { authenticateuser} from "../middleware/auth.middleware.js";
-import { isAdmin } from "../middleware/admin.middleware.js";
+import { createHotel, getAllHotels, getHotelById, updateHotel, deleteHotel, } from "../../controllers/admin/hotel.controller.js";
+import { authenticateuser} from "../../middleware/auth/auth.middleware.js";
+import { isAdmin } from "../../middleware/admin/admin.middleware.js";
 import { validateCreateHotel } from "../../validator/admin/hotel.validator.js"
 
 const router = express.Router();

@@ -1,4 +1,4 @@
-import userModel from "../models/user.model.js";
+import userModel from "../../models/auth/user.model.js";
 import hotelModel from "../../models/admin/hotel.model.js";
 import roomModel from "../../models/admin/room.model.js";
 import bookingModel from "../../models/admin/booking.model.js";

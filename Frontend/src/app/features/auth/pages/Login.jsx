@@ -38,12 +38,12 @@ const Login = () => {
     setIsLoading(true);
 
     try {
-      console.log("Logging in user...", formData);
+      // console.log("Logging in user...", formData);
       const user = await handleLogin(formData);
 
-      console.log("Backend response:", user);
+      // console.log("Backend response:", user);
 
-      toast.success("Successfully logged in!");
+      // toast.success("Successfully logged in!");
 
       setTimeout(() => {
         if (user?.role === "admin") {
