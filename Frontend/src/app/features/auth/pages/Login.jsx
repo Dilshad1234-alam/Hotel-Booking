@@ -1,0 +1,228 @@
+import React, { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import { useAuth } from "../hooks/useAuth";
+import { toast, Toaster } from "react-hot-toast";
+import { FiEye, FiEyeOff, FiMail, FiLock } from "react-icons/fi";
+import "../../../App.css";
+
+const Login = () => {
+  const { handleLogin } = useAuth();
+  const navigate = useNavigate();
+
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleChange = (e) => {
+    setFormData((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const validateForm = () => {
+    if (!formData.email.trim()) return toast.error("Email is required");
+    if (!formData.password) return toast.error("Password is required");
+    return true;
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (validateForm() !== true) return;
+
+    setIsLoading(true);
+
+    try {
+      console.log("Logging in user...", formData);
+      const user = await handleLogin(formData);
+
+      console.log("Backend response:", user);
+
+      toast.success("Successfully logged in!");
+
+      setTimeout(() => {
+        if (user?.role === "admin") {
+          navigate("/admin/dashboard");
+        } else {
+          navigate("/");
+        }
+      }, 1200);
+    } catch (err) {
+      console.error("Login failed:", err);
+      const message =
+        err.response?.data?.message ||
+        err.message ||
+        "Failed to login. Please check your credentials.";
+
+      toast.error(message);
+      setIsLoading(false);
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-[#0f0f0f] text-white flex flex-col lg:flex-row relative font-sans">
+      <Toaster position="top-right" />
+
+      {/* Left Side: Brand Section (Hidden on Mobile) */}
+      <div className="hidden lg:flex lg:w-1/2 relative overflow-hidden flex-col justify-between p-16 select-none">
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{
+            backgroundImage:
+              "url('https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=1200&auto=format&fit=crop')",
+          }}
+        />
+
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-zinc-950/70 to-[#0f0f0f]" />
+
+        <div className="relative z-20 flex items-center gap-3">
+          <div className="w-10 h-10 rounded-full border border-[#d4af37]/30 bg-[#d4af37]/10 flex items-center justify-center">
+            <span className="text-[#d4af37] font-serif text-lg font-bold">
+              B
+            </span>
+          </div>
+
+          <div>
+            <h1 className="text-white text-base font-semibold tracking-widest uppercase">
+              BookMyStay
+            </h1>
+            <p className="text-[#d4af37] text-[8px] tracking-[0.3em] uppercase">
+              Hotels • Travels • Rooms
+            </p>
+          </div>
+        </div>
+
+        <div className="relative z-20 max-w-md space-y-5">
+          <p className="inline-block px-3 py-1 border border-[#d4af37]/20 bg-[#d4af37]/10 text-[#d4af37] text-[9px] uppercase tracking-[0.2em] rounded-full">
+            Discover. Book. Relax.
+          </p>
+
+          <h2 className="font-serif text-5xl font-light leading-tight">
+            Welcome Back to <br />
+            <span className="text-[#d4af37] font-semibold">
+              BookMyStay
+            </span>
+          </h2>
+
+          <p className="text-sm text-[#a1a1aa] leading-relaxed">
+            Access your account to manage your reservations, explore exclusive deals, and discover your next luxury retreat.
+          </p>
+        </div>
+
+        <p className="relative z-20 text-[10px] text-zinc-500">
+          © {new Date().getFullYear()} BookMyStay. All rights reserved.
+        </p>
+      </div>
+
+      {/* Right Side: Login Form Card */}
+      <div className="w-full lg:w-1/2 flex items-center justify-center p-6 sm:p-10">
+        <div className="w-full max-w-[520px] bg-[#18181b]/80 border border-[#27272a] rounded-2xl p-8 sm:p-10 shadow-2xl">
+          <div className="lg:hidden text-center mb-8">
+            <h1 className="text-white text-lg tracking-widest uppercase font-semibold">
+              BookMyStay
+            </h1>
+            <p className="text-[#d4af37] text-[9px] tracking-[0.3em] uppercase">
+              Hotels • Travels • Rooms
+            </p>
+          </div>
+
+          <div className="mb-8">
+            <h2 className="font-serif text-3xl font-light">
+              Sign In
+            </h2>
+            <p className="text-xs text-[#a1a1aa] mt-2">
+              Welcome back! Please enter your credentials to access your portal.
+            </p>
+          </div>
+
+          <form onSubmit={handleSubmit} className="space-y-5">
+            <Input
+              icon={<FiMail />}
+              label="Email Address"
+              name="email"
+              type="email"
+              value={formData.email}
+              onChange={handleChange}
+              placeholder="name@example.com"
+            />
+
+            <div>
+              <label className="text-xs uppercase tracking-widest text-[#a1a1aa]">
+                Password
+              </label>
+
+              <div className="relative mt-1.5">
+                <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-500">
+                  <FiLock />
+                </span>
+
+                <input
+                  type={showPassword ? "text" : "password"}
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  placeholder="••••••••"
+                  className="w-full bg-zinc-950/40 border border-[#27272a] focus:border-[#d4af37] outline-none rounded-xl pl-10 pr-10 py-3 text-sm text-white placeholder-zinc-600"
+                />
+
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-zinc-500 hover:text-white cursor-pointer"
+                >
+                  {showPassword ? <FiEyeOff /> : <FiEye />}
+                </button>
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              disabled={isLoading}
+              className="w-full py-3.5 rounded-xl bg-[#d4af37] text-zinc-950 font-bold uppercase tracking-widest text-xs hover:bg-[#cda62d] transition disabled:opacity-60 cursor-pointer"
+            >
+              {isLoading ? "Signing In..." : "Sign In"}
+            </button>
+
+            <p className="text-center text-xs text-[#a1a1aa]">
+              Don’t have an account?{" "}
+              <Link
+                to="/register"
+                className="text-[#d4af37] font-semibold underline underline-offset-4"
+              >
+                Create Account
+              </Link>
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const Input = ({ icon, label, ...props }) => {
+  return (
+    <div>
+      <label className="text-xs uppercase tracking-widest text-[#a1a1aa]">
+        {label}
+      </label>
+
+      <div className="relative mt-1.5">
+        <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-500">
+          {icon}
+        </span>
+
+        <input
+          {...props}
+          className="w-full bg-zinc-950/40 border border-[#27272a] focus:border-[#d4af37] outline-none rounded-xl pl-10 pr-4 py-3 text-sm text-white placeholder-zinc-600"
+        />
+      </div>
+    </div>
+  );
+};
+
+export default Login;
