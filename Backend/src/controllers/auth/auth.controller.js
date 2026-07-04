@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt'
-import userModel from "../models/user.model.js";
+import userModel from "../../models/auth/user.model.js";
 import jwt from 'jsonwebtoken'
-import { config } from '../config/config.js';
+import { config } from '../../config/config.js';
 
 async function sendTokenResponse(user, res, message) {
     

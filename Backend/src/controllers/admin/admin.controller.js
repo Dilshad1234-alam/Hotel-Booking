@@ -1,8 +1,8 @@
 import userModel from "../models/user.model.js";
-import hotelModel from "../models/hotel.model.js";
-import roomModel from "../models/room.model.js";
-import bookingModel from "../models/booking.model.js";
-import paymentModel from "../models/payment.model.js";
+import hotelModel from "../../models/admin/hotel.model.js";
+import roomModel from "../../models/admin/room.model.js";
+import bookingModel from "../../models/admin/booking.model.js";
+import paymentModel from "../../models/admin/payment.model.js";
 
 export const getAdminDashboard = async (req, res) => {
     try {

@@ -1,6 +1,6 @@
-import { config } from '../config/config.js'
+import { config } from '../../config/config.js'
 import jwt from 'jsonwebtoken'
-import userModel from '../models/user.model.js'
+import userModel from '../../models/auth/user.model.js'
 
 export const authenticateuser = async (req, res, next) => {
     const token = req.cookies.token 
