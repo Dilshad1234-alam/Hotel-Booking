@@ -35,7 +35,7 @@ const bookingSchema = new mongoose.Schema(
         },
         status: {
             type: String,
-            enum: ["pending", "approved", "cancelled", "completed"],
+            enum: ["pending", "approved", "checked_in", "cancelled", "completed"],
             default: "pending",
         },
         paymentStatus: {
@@ -43,6 +43,19 @@ const bookingSchema = new mongoose.Schema(
             enum: ["pending", "paid", "failed", "refunded"],
             default: "pending",
         },
+
+        timeline: [
+          {
+            title: String,
+            status: String,
+            date: {
+              type: Date,
+              default: Date.now,
+            },
+            note: String,
+          },
+        ]
+
     },
     { timestamps: true }
 );

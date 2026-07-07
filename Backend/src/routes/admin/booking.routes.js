@@ -14,4 +14,5 @@ router.post("/", authenticateuser, createBooking)
 router.get("/", authenticateuser, isAdmin, getAllBookings);
 router.patch("/:id/status", authenticateuser, isAdmin, updateBookingStatus);
 
+
 export default router;

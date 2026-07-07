@@ -8,7 +8,8 @@ import roomRouter  from './routes/admin/room.routes.js'
 import paymentRouter from "./routes/admin/payment.routes.js";
 import reviewRouter from "./routes/admin/review.routes.js";
 import bookingRouter from "./routes/admin/booking.routes.js";
-import uploadRouter from "./routes/admin/upload.routes.js"
+import userRouter from "./routes/user/user.routes.js"
+import userPaymentRouter from "./routes/user/payment.routes.js"
 
 
 const app = express()
@@ -21,9 +22,6 @@ app.use(cors({
     credentials: true,
 }))
 
-app.use("/api/upload", uploadRouter)
-
-
 app.use("/api/auth", authRouter)
 app.use("/api/admin", adminRouter)
 app.use("/api/admin/bookings", bookingRouter)
@@ -32,6 +30,8 @@ app.use("/api/admin/reviews", reviewRouter)
 app.use("/api/hotels", hotelRouter)
 app.use("/api/rooms", roomRouter)
 
+app.use("/api/user", userRouter)
+app.use("/api/user/payment", userPaymentRouter)
 
 
 export default app

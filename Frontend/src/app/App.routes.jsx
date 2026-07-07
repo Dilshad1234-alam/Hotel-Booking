@@ -1,19 +1,35 @@
 import { createBrowserRouter } from "react-router-dom";
 
-import Home from "./features/auth/pages/Home";
+// import Home from "./features/auth/pages/Home";
 import Login from "./features/auth/pages/Login";
 import Register from "./features/auth/pages/Register";
 import Protected from "./features/auth/components/Protected";
 
-// Dashboard
+
+// =====================
+// USER PAGES
+// =====================
+import Home from "./features/user/pages/Home";
+import UserHotelDetails from "./features/user/pages/HotelsRoomDetails"
+import MyBooking from "./features/user/pages/MyBooking";
+
+
+// =====================
+// ADMIN DASHBOARD
+// =====================
 import AdminDashboard from "./features/admin/pages/dashboard/AdminDashboard";
 
 // Hotels
 import AdminHotels from "./features/admin/pages/hotels/AdminHotels";
 import AddHotel from "./features/admin/pages/hotels/AddHotel";
+import HotelDetails from "./features/admin/pages/hotels/HotelDetails";
+import EditHotel from "./features/admin/pages/hotels/EditHotels";
 
 // Rooms
 import AdminRooms from "./features/admin/pages/rooms/AdminRooms";
+import AddRoom from "./features/admin/pages/rooms/AddRoom";
+import RoomDetails from "./features/admin/pages/rooms/RoomDetails";
+import EditRoom from "./features/admin/pages/rooms/EditRoom";
 
 // Bookings
 import AdminBookings from "./features/admin/pages/bookings/AdminBooking";
@@ -26,17 +42,13 @@ import AdminReviews from "./features/admin/pages/reviews/AdminReviews";
 
 // Users
 import AdminUsers from "./features/admin/pages/users/AdminUsers";
-import HotelDetails from "./features/admin/pages/hotels/HotelDetails";
-import EditHotel from "./features/admin/pages/hotels/EditHotels";
-import AddRoom from "./features/admin/pages/rooms/AddRoom";
-import RoomDetails from "./features/admin/pages/rooms/RoomDetails";
-import EditRoom from "./features/admin/pages/rooms/EditRoom";
+import AISmartMatch from "./features/user/pages/AISmartMatch";
 
 export const routes = createBrowserRouter([
-  {
-    path: "/",
-    element: <Home />,
-  },
+
+  // =====================
+  // AUTH ROUTES
+  // =====================
 
   {
     path: "/register",
@@ -46,6 +58,40 @@ export const routes = createBrowserRouter([
   {
     path: "/login",
     element: <Login />,
+  },
+
+  // =====================
+  // USER ROUTES
+  // =====================
+
+  {
+    path: "/",
+    element: <Home />,
+  },
+  {
+    path: "/hotels/:id",
+    element: (
+      <Protected role="user">
+        <UserHotelDetails/>
+      </Protected>
+    )
+  },
+
+  {
+    path: "/my-bookings",
+    element: (
+      <Protected role="user">
+        <MyBooking />
+      </Protected>
+    )
+  },
+  {
+    path: "/ai-match",
+    element: (
+      <Protected role="user">
+        <AISmartMatch />
+      </Protected>
+    )
   },
 
   // =====================

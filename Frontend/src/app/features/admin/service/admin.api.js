@@ -23,8 +23,12 @@ export const getHotelById = async (id) => {
   return res.data;
 };
 
-export const createHotel = async (data) => {
-  const res = await adminApi.post("/hotels", data);
+export const createHotel = async (formData) => {
+  const res = await adminApi.post("/hotels", formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    }
+  });
   return res.data;
 };
 
@@ -50,8 +54,14 @@ export const getRoomById = async (id) => {
   return res.data;
 };
 
-export const createRoom = async (data) => {
-  const res = await adminApi.post("/rooms", data);
+
+export const createRoom = async (formData) => {
+  const res = await adminApi.post("/rooms", formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+
   return res.data;
 };
 
@@ -112,16 +122,16 @@ export const getReviews = async () => {
 };
 
 
-export const uploadImage = async (file) => {
-  const formData = new FormData();
+// export const uploadImage = async (file) => {
+//   const formData = new FormData();
 
-  formData.append("image", file);
+//   formData.append("image", file);
 
-  const res = await adminApi.post("/upload", formData, {
-    headers: {
-      "Content-Type": "multipart/form-data",
-    },
-  });
+//   const res = await adminApi.post("/upload", formData, {
+//     headers: {
+//       "Content-Type": "multipart/form-data",
+//     },
+//   });
 
-  return res.data;
-};
+//   return res.data;
+// };

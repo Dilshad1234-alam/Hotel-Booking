@@ -1,20 +1,44 @@
 import hotelModel from "../../models/admin/hotel.model.js";
+import imagekit from "../../config/imageKit.js"
 
 export const createHotel = async (req, res) => {
-    try {
-        const hotel = await hotelModel.create({
-            ...req.body,
-            createdBy: req.user._id,
-        });
+  try {
+    let images = [];
 
-        return res.status(201).json({
-            success: true,
-            message: "Hotel created successfully",
-            hotel,
-        });
-    } catch (error) {
-        return res.status(500).json({ success: false, message: error.message });
+    if (req.file) {
+      const response = await imagekit.upload({
+        file: req.file.buffer.toString("base64"),
+        fileName: `${Date.now()}-${req.file.originalname}`,
+        folder: "bookmystay/hotels",
+      });
+
+      images.push({
+        url: response.url,
+      });
     }
+
+    const hotel = await hotelModel.create({
+      ...req.body,
+      rating: Number(req.body.rating),
+      amenities: req.body.amenities
+        ? req.body.amenities.split(",").map((item) => item.trim())
+        : [],
+      images,
+      createdBy: req.user._id,
+    });
+
+    return res.status(201).json({
+      success: true,
+      message: "Hotel created successfully",
+      hotel,
+    });
+  } catch (error) {
+    console.log("Create hotel error:", error);
+    return res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
 };
 
 export const getAllHotels = async (req, res) => {
