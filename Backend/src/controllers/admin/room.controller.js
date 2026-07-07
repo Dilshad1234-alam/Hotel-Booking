@@ -1,6 +1,6 @@
 import roomModel from "../../models/admin/room.model.js";
 import hotelModel from "../../models/admin/hotel.model.js";
-import imagekit from "../../config/imagekit.js";
+import imagekit from "../../config/imageKit.js";
 
 export const createRoom = async (req, res) => {
   try {
