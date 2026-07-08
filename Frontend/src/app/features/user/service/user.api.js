@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const userApiInstance = axios.create({
-  baseURL: "http://localhost:3000/api/user",
+  baseURL: `${import.meta.env.VITE_BACKEND_URL}/api/user`,
   withCredentials: true,
 });
 
