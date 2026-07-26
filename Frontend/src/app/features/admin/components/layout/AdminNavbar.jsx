@@ -5,13 +5,14 @@ import {
   FiUser,
   FiLogOut,
   FiArrowLeft,
+  FiMenu,
 } from "react-icons/fi";
 
 import { useSelector } from "react-redux";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../../../auth/hooks/useAuth";
 
-const AdminNavbar = () => {
+const AdminNavbar = ({ onMenuClick }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const { handleLogout } = useAuth();
@@ -30,13 +31,21 @@ const AdminNavbar = () => {
   const showBack = location.pathname !== "/admin/dashboard";
 
   return (
-    <header className="fixed top-0 left-0 md:left-72 right-0 z-35 h-20 bg-[#0b0c10]/90 backdrop-blur-xl border-b border-zinc-800/80 px-6 md:px-8 flex items-center justify-between transition-all duration-300">
+    <header className="fixed top-0 left-0 md:left-72 right-0 z-30 h-20 bg-[#0b0c10]/90 backdrop-blur-xl border-b border-zinc-800/80 px-4 md:px-8 flex items-center justify-between transition-all duration-300">
       {/* Left Side */}
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-2 md:gap-4">
+        {/* Mobile Menu Button */}
+        <button
+          onClick={onMenuClick}
+          className="md:hidden w-10 h-10 rounded-xl bg-[#111216] border border-zinc-800 flex items-center justify-center text-zinc-400 hover:text-[#d4af37] transition shadow-sm cursor-pointer"
+        >
+          <FiMenu size={18} />
+        </button>
+
         {showBack && (
           <button
             onClick={() => navigate(-1)}
-            className="w-10 h-10 rounded-xl bg-[#111216] border border-zinc-800 flex items-center justify-center text-zinc-400 hover:text-[#d4af37] hover:border-[#d4af37]/40 transition shadow-sm cursor-pointer"
+            className="w-10 h-10 rounded-xl bg-[#111216] border border-zinc-800 hidden md:flex items-center justify-center text-zinc-400 hover:text-[#d4af37] hover:border-[#d4af37]/40 transition shadow-sm cursor-pointer"
             title="Go Back"
           >
             <FiArrowLeft size={16} />

@@ -93,8 +93,7 @@ const SkeletonCard = () => (
     borderRadius: "24px",
     overflow: "hidden",
     display: "grid",
-    gridTemplateColumns: "280px 1fr",
-  }}>
+  }} className="booking-card-grid">
     <div style={{ background: "#1a1a1f", minHeight: "260px", animation: "pulse 1.5s ease-in-out infinite" }} />
     <div style={{ padding: "32px" }}>
       {[100, 60, 80, 40, 50].map((w, i) => (
@@ -170,7 +169,7 @@ const BookingCard = ({ booking, index }) => {
         e.currentTarget.style.boxShadow = "none";
       }}
     >
-      <div style={{ display: "grid", gridTemplateColumns: "clamp(180px,26%,280px) 1fr" }}>
+      <div className="booking-card-grid" style={{ display: "grid" }}>
         {/* Hotel Image */}
         <div style={{ position: "relative", minHeight: "260px", overflow: "hidden" }}>
           <img
@@ -544,6 +543,15 @@ const MyBooking = () => {
         ::-webkit-scrollbar-thumb { background: #27272a; border-radius: 3px; }
         input::placeholder { color: #52525b; }
         input:focus { outline: none; }
+        
+        .booking-card-grid {
+          grid-template-columns: clamp(180px, 26%, 280px) 1fr;
+        }
+        @media (max-width: 768px) {
+          .booking-card-grid {
+            grid-template-columns: 1fr;
+          }
+        }
       `}</style>
 
       <UserNavbar />

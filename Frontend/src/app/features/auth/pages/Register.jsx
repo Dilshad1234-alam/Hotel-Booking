@@ -123,8 +123,8 @@ const Register = () => {
         </p>
       </div>
 
-      <div className="w-full lg:w-1/2 flex items-center justify-center p-6 sm:p-10">
-        <div className="w-full max-w-[520px] bg-[#18181b]/80 border border-[#27272a] rounded-2xl p-8 sm:p-10 shadow-2xl">
+      <div className="w-full flex-1 lg:w-1/2 flex items-center justify-center p-4 py-8 sm:p-10">
+        <div className="w-full max-w-[520px] bg-[#18181b]/80 border border-[#27272a] rounded-2xl p-6 sm:p-10 shadow-2xl">
           <div className="lg:hidden text-center mb-8">
             <h1 className="text-white text-lg tracking-widest uppercase font-semibold">
               BookMyStay

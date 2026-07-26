@@ -511,7 +511,7 @@ const HotelDetails = () => {
             {rooms.length === 0 ? (
               <div style={{ background:"#111216",border:"1px solid #27272a",borderRadius:"20px",padding:"48px",textAlign:"center",color:"#52525b" }}>No rooms available at the moment.</div>
             ) : (
-              <div style={{ display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(320px,1fr))",gap:"20px" }}>
+              <div style={{ display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(280px,1fr))",gap:"20px" }}>
                 {rooms.map((room, i) => {
                   const avail = room.availableRooms ?? 1;
                   return (

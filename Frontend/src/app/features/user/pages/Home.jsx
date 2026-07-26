@@ -194,6 +194,19 @@ const Home = () => {
         input::placeholder { color: #52525b; }
         input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(0.5); cursor: pointer; }
         input[type="date"] { color-scheme: dark; }
+        
+        .hero-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+        @media (max-width: 900px) {
+          .hero-grid {
+            grid-template-columns: 1fr;
+            text-align: center;
+          }
+          .hero-grid .search-container {
+            justify-content: center;
+          }
+        }
       `}</style>
 
       <UserNavbar />
@@ -220,7 +233,7 @@ const Home = () => {
         <div style={{ position: "absolute", top: "15%", right: "8%", width: "400px", height: "400px", background: "radial-gradient(circle, rgba(212,175,55,0.07) 0%, transparent 70%)", borderRadius: "50%", animation: "floatY 6s ease-in-out infinite", pointerEvents: "none" }} />
         <div style={{ position: "absolute", bottom: "20%", left: "5%", width: "280px", height: "280px", background: "radial-gradient(circle, rgba(168,85,247,0.05) 0%, transparent 70%)", borderRadius: "50%", pointerEvents: "none" }} />
 
-        <div style={{ maxWidth: "1280px", margin: "0 auto", padding: "120px 24px 80px", position: "relative", width: "100%", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "60px", alignItems: "center" }}>
+        <div className="hero-grid" style={{ maxWidth: "1280px", margin: "0 auto", padding: "120px 24px 80px", position: "relative", width: "100%", display: "grid", gap: "60px", alignItems: "center" }}>
 
           {/* ── Left: Text + Search ── */}
           <div style={{ opacity: heroLoaded ? 1 : 0, transform: heroLoaded ? "translateY(0)" : "translateY(30px)", transition: "opacity 0.8s ease, transform 0.8s ease" }}>

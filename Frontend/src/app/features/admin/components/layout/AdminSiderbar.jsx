@@ -9,6 +9,7 @@ import {
   FiStar,
   FiUsers,
   FiLogOut,
+  FiX,
 } from "react-icons/fi";
 
 const links = [
@@ -21,7 +22,7 @@ const links = [
   { label: "Users", path: "/admin/users", icon: FiUsers },
 ];
 
-const AdminSidebar = () => {
+const AdminSidebar = ({ isOpen, setIsOpen }) => {
   const navigate = useNavigate();
   const { handleLogout } = useAuth();
 
@@ -35,7 +36,24 @@ const AdminSidebar = () => {
   };
 
   return (
-    <aside className="fixed top-0 left-0 w-72 min-h-screen bg-[#0b0c10] border-r border-zinc-800 p-6 hidden md:flex flex-col justify-between z-40">
+    <>
+      {/* Mobile Overlay */}
+      {isOpen && (
+        <div 
+          className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 md:hidden transition-opacity"
+          onClick={() => setIsOpen(false)}
+        />
+      )}
+      
+      <aside className={`fixed top-0 left-0 w-72 min-h-screen bg-[#0b0c10] border-r border-zinc-800 p-6 flex flex-col justify-between z-50 transition-transform duration-300 ${isOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"}`}>
+        
+        {/* Mobile Close Button */}
+        <button 
+          onClick={() => setIsOpen(false)}
+          className="md:hidden absolute top-6 right-6 w-8 h-8 rounded-lg bg-zinc-900 flex items-center justify-center text-zinc-400 hover:text-white"
+        >
+          <FiX size={18} />
+        </button>
       <div>
         {/* Brand Header */}
         <div className="flex items-center gap-3 mb-10 mt-2">
@@ -89,6 +107,7 @@ const AdminSidebar = () => {
         </button>
       </div>
     </aside>
+    </>
   );
 };
 
