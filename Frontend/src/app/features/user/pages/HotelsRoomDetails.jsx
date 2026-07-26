@@ -242,7 +242,7 @@ const BookingModal = ({ room, hotel, user, onClose }) => {
 
             <div style={{ padding:"24px 26px" }}>
               {/* Dates */}
-              <div style={{ display:"grid",gridTemplateColumns:"1fr 1fr",gap:"12px",marginBottom:"14px" }}>
+              <div className="booking-dates" style={{ display:"grid",gridTemplateColumns:"1fr 1fr",gap:"12px",marginBottom:"14px" }}>
                 {[
                   { label:"CHECK IN", val:checkIn, min:todayStr(), onChange:e=>{ setCheckIn(e.target.value); if(checkOut&&e.target.value>=checkOut) setCheckOut(""); }, disabled:false },
                   { label:"CHECK OUT", val:checkOut, min:minCO(checkIn), onChange:e=>setCheckOut(e.target.value), disabled:!checkIn },
@@ -415,6 +415,13 @@ const HotelDetails = () => {
         ::-webkit-scrollbar { width:6px }
         ::-webkit-scrollbar-track { background:#0b0c10 }
         ::-webkit-scrollbar-thumb { background:#27272a; border-radius:3px }
+        @media (max-width: 768px) {
+          .hotel-header { flex-direction: column; align-items: flex-start !important; }
+          .hotel-info-row { flex-direction: column; }
+          .tabs-container { overflow-x: auto; white-space: nowrap; flex-wrap: nowrap !important; }
+          .rooms-grid { grid-template-columns: 1fr !important; }
+          .booking-dates { grid-template-columns: 1fr !important; }
+        }
       `}</style>
 
       <Toaster position="top-right" toastOptions={{ style:{ background:"#111216",color:"#fff",border:"1px solid #27272a" } }} />
@@ -439,7 +446,7 @@ const HotelDetails = () => {
             <div style={{ position:"absolute",inset:0,background:"linear-gradient(to top,rgba(11,12,16,0.8) 0%,transparent 55%)" }} />
 
             {/* Hotel info overlay */}
-            <div style={{ position:"absolute",bottom:"24px",left:"28px",right:"28px",display:"flex",justifyContent:"space-between",alignItems:"flex-end",flexWrap:"wrap",gap:"12px" }}>
+            <div className="hotel-header" style={{ position:"absolute",bottom:"24px",left:"28px",right:"28px",display:"flex",justifyContent:"space-between",alignItems:"flex-end",flexWrap:"wrap",gap:"12px" }}>
               <div>
                 <p style={{ fontSize:"10px",letterSpacing:"0.35em",color:"#d4af37",fontWeight:700,margin:"0 0 8px" }}>✦ HOTEL DETAILS</p>
                 <h1 style={{ fontFamily:"Georgia,serif",fontSize:"clamp(1.8rem,4vw,2.8rem)",color:"#fff",margin:"0 0 6px",textShadow:"0 2px 20px rgba(0,0,0,0.5)",lineHeight:1.2 }}>{hotel.name}</h1>
@@ -467,7 +474,7 @@ const HotelDetails = () => {
           </div>
 
           {/* Hotel info row */}
-          <div style={{ padding:"24px 28px",display:"flex",justifyContent:"space-between",alignItems:"flex-start",flexWrap:"wrap",gap:"16px",borderBottom:"1px solid #27272a" }}>
+          <div className="hotel-info-row" style={{ padding:"24px 28px",display:"flex",justifyContent:"space-between",alignItems:"flex-start",flexWrap:"wrap",gap:"16px",borderBottom:"1px solid #27272a" }}>
             <p style={{ color:"#71717a",lineHeight:1.75,fontSize:"14px",maxWidth:"680px",margin:0 }}>
               {hotel.description || "Experience luxury and comfort at its finest."}
             </p>
@@ -488,7 +495,7 @@ const HotelDetails = () => {
           </div>
 
           {/* Tabs */}
-          <div style={{ display:"flex",gap:0,padding:"0 28px" }}>
+          <div className="tabs-container" style={{ display:"flex",gap:0,padding:"0 28px", overflowX: "auto" }}>
             {[["rooms","🛏 Rooms"],["amenities","✨ Amenities"],["reviews","⭐ Reviews"]].map(([tab,label]) => (
               <button key={tab} onClick={() => setActiveTab(tab)} style={{
                 padding:"16px 20px",background:"none",border:"none",borderBottom:`2px solid ${activeTab===tab?"#d4af37":"transparent"}`,
@@ -511,7 +518,7 @@ const HotelDetails = () => {
             {rooms.length === 0 ? (
               <div style={{ background:"#111216",border:"1px solid #27272a",borderRadius:"20px",padding:"48px",textAlign:"center",color:"#52525b" }}>No rooms available at the moment.</div>
             ) : (
-              <div style={{ display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(280px,1fr))",gap:"20px" }}>
+              <div className="rooms-grid" style={{ display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(280px,1fr))",gap:"20px" }}>
                 {rooms.map((room, i) => {
                   const avail = room.availableRooms ?? 1;
                   return (

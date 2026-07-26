@@ -237,151 +237,153 @@ const UserNavbar = () => {
           {/* ── Right: User / Login ── */}
           <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
 
-            {user ? (
-              /* User Avatar + Dropdown */
-              <div id="user-dropdown" style={{ position: "relative" }}>
-                <button
-                  onClick={() => setDropOpen(d => !d)}
-                  style={{
-                    display: "flex", alignItems: "center", gap: "10px",
-                    background: "rgba(17,18,22,0.9)",
-                    border: dropOpen ? "1px solid rgba(212,175,55,0.4)" : "1px solid #27272a",
-                    borderRadius: "14px",
-                    padding: "8px 14px 8px 8px",
-                    cursor: "pointer",
-                    transition: "all 0.2s",
-                    fontFamily: "inherit",
-                  }}
-                  onMouseEnter={e => !dropOpen && (e.currentTarget.style.borderColor = "#3f3f46")}
-                  onMouseLeave={e => !dropOpen && (e.currentTarget.style.borderColor = "#27272a")}
-                >
-                  {/* Avatar */}
-                  <div style={{
-                    width: "32px", height: "32px", borderRadius: "10px",
-                    background: "linear-gradient(135deg, #d4af37, #f0c960)",
-                    display: "flex", alignItems: "center", justifyContent: "center",
-                    color: "#0b0c10", fontWeight: 800, fontSize: "14px", flexShrink: 0,
-                  }}>
-                    {user.fullname?.charAt(0)?.toUpperCase() || "U"}
-                  </div>
-                  <div style={{ textAlign: "left" }}>
-                    <p style={{ color: "#fff", fontSize: "13px", fontWeight: 600, margin: 0, lineHeight: 1.2, maxWidth: "100px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
-                      {user.fullname || "User"}
-                    </p>
-                    <p style={{ color: "#52525b", fontSize: "10px", margin: 0, textTransform: "capitalize" }}>
-                      {user.role || "Guest"}
-                    </p>
-                  </div>
-                  {/* Chevron */}
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#52525b" strokeWidth="2.5" style={{ transition: "transform 0.2s", transform: dropOpen ? "rotate(180deg)" : "rotate(0)" }}>
-                    <polyline points="6 9 12 15 18 9"/>
-                  </svg>
-                </button>
-
-                {/* Dropdown Menu */}
-                {dropOpen && (
-                  <div style={{
-                    position: "absolute", top: "calc(100% + 8px)", right: 0,
-                    background: "#111216",
-                    border: "1px solid #27272a",
-                    borderRadius: "16px",
-                    padding: "8px",
-                    minWidth: "200px",
-                    boxShadow: "0 16px 48px rgba(0,0,0,0.5)",
-                    animation: "slideDown 0.2s ease",
-                    zIndex: 200,
-                  }}>
-                    {/* User info */}
-                    <div style={{ padding: "12px 14px 10px", borderBottom: "1px solid #27272a", marginBottom: "6px" }}>
-                      <p style={{ color: "#fff", fontSize: "14px", fontWeight: 600, margin: "0 0 2px" }}>{user.fullname}</p>
-                      <p style={{ color: "#52525b", fontSize: "12px", margin: 0 }}>{user.email}</p>
+            <div className="desktop-user-actions" style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+              {user ? (
+                /* User Avatar + Dropdown */
+                <div id="user-dropdown" style={{ position: "relative" }}>
+                  <button
+                    onClick={() => setDropOpen(d => !d)}
+                    style={{
+                      display: "flex", alignItems: "center", gap: "10px",
+                      background: "rgba(17,18,22,0.9)",
+                      border: dropOpen ? "1px solid rgba(212,175,55,0.4)" : "1px solid #27272a",
+                      borderRadius: "14px",
+                      padding: "8px 14px 8px 8px",
+                      cursor: "pointer",
+                      transition: "all 0.2s",
+                      fontFamily: "inherit",
+                    }}
+                    onMouseEnter={e => !dropOpen && (e.currentTarget.style.borderColor = "#3f3f46")}
+                    onMouseLeave={e => !dropOpen && (e.currentTarget.style.borderColor = "#27272a")}
+                  >
+                    {/* Avatar */}
+                    <div style={{
+                      width: "32px", height: "32px", borderRadius: "10px",
+                      background: "linear-gradient(135deg, #d4af37, #f0c960)",
+                      display: "flex", alignItems: "center", justifyContent: "center",
+                      color: "#0b0c10", fontWeight: 800, fontSize: "14px", flexShrink: 0,
+                    }}>
+                      {user.fullname?.charAt(0)?.toUpperCase() || "U"}
                     </div>
-
-                    {/* Links */}
-                    {[
-                      { label: "My Bookings", icon: <BookmarkIcon />, onClick: () => { navigate("/my-bookings"); setDropOpen(false); } },
-                    ].map(({ label, icon, onClick }) => (
-                      <button
-                        key={label}
-                        onClick={onClick}
-                        style={{
-                          width: "100%", display: "flex", alignItems: "center", gap: "10px",
-                          padding: "10px 14px", borderRadius: "10px",
-                          background: "none", border: "none", cursor: "pointer",
-                          color: "#a1a1aa", fontSize: "13px", fontWeight: 500,
-                          fontFamily: "inherit", textAlign: "left",
-                          transition: "background 0.15s, color 0.15s",
-                        }}
-                        onMouseEnter={e => { e.currentTarget.style.background = "#1a1a1f"; e.currentTarget.style.color = "#fff"; }}
-                        onMouseLeave={e => { e.currentTarget.style.background = "none"; e.currentTarget.style.color = "#a1a1aa"; }}
-                      >
-                        {icon} {label}
-                      </button>
-                    ))}
-
-                    <div style={{ borderTop: "1px solid #27272a", marginTop: "6px", paddingTop: "6px" }}>
-                      <button
-                        onClick={handleLogout}
-                        style={{
-                          width: "100%", display: "flex", alignItems: "center", gap: "10px",
-                          padding: "10px 14px", borderRadius: "10px",
-                          background: "none", border: "none", cursor: "pointer",
-                          color: "#ef4444", fontSize: "13px", fontWeight: 600,
-                          fontFamily: "inherit", textAlign: "left",
-                          transition: "background 0.15s",
-                        }}
-                        onMouseEnter={e => e.currentTarget.style.background = "rgba(239,68,68,0.08)"}
-                        onMouseLeave={e => e.currentTarget.style.background = "none"}
-                      >
-                        <LogoutIcon /> Logout
-                      </button>
+                    <div style={{ textAlign: "left" }}>
+                      <p style={{ color: "#fff", fontSize: "13px", fontWeight: 600, margin: 0, lineHeight: 1.2, maxWidth: "100px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+                        {user.fullname || "User"}
+                      </p>
+                      <p style={{ color: "#52525b", fontSize: "10px", margin: 0, textTransform: "capitalize" }}>
+                        {user.role || "Guest"}
+                      </p>
                     </div>
-                  </div>
-                )}
-              </div>
-            ) : (
-              /* Login / Register buttons */
-              <div style={{ display: "flex", gap: "8px" }}>
-                <Link
-                  to="/login"
-                  style={{
-                    padding: "9px 18px",
-                    borderRadius: "12px",
-                    background: "transparent",
-                    border: "1px solid #27272a",
-                    color: "#a1a1aa",
-                    fontSize: "13px",
-                    fontWeight: 600,
-                    textDecoration: "none",
-                    transition: "all 0.2s",
-                    display: "flex", alignItems: "center", gap: "6px",
-                  }}
-                  onMouseEnter={e => { e.currentTarget.style.borderColor = "#3f3f46"; e.currentTarget.style.color = "#fff"; }}
-                  onMouseLeave={e => { e.currentTarget.style.borderColor = "#27272a"; e.currentTarget.style.color = "#a1a1aa"; }}
-                >
-                  <UserCircleIcon /> Login
-                </Link>
-                <Link
-                  to="/register"
-                  style={{
-                    padding: "9px 18px",
-                    borderRadius: "12px",
-                    background: "linear-gradient(135deg, #d4af37, #f0c960)",
-                    border: "none",
-                    color: "#0b0c10",
-                    fontSize: "13px",
-                    fontWeight: 700,
-                    textDecoration: "none",
-                    boxShadow: "0 4px 16px rgba(212,175,55,0.28)",
-                    transition: "opacity 0.2s",
-                  }}
-                  onMouseEnter={e => e.currentTarget.style.opacity = "0.88"}
-                  onMouseLeave={e => e.currentTarget.style.opacity = "1"}
-                >
-                  Get Started
-                </Link>
-              </div>
-            )}
+                    {/* Chevron */}
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#52525b" strokeWidth="2.5" style={{ transition: "transform 0.2s", transform: dropOpen ? "rotate(180deg)" : "rotate(0)" }}>
+                      <polyline points="6 9 12 15 18 9"/>
+                    </svg>
+                  </button>
+
+                  {/* Dropdown Menu */}
+                  {dropOpen && (
+                    <div style={{
+                      position: "absolute", top: "calc(100% + 8px)", right: 0,
+                      background: "#111216",
+                      border: "1px solid #27272a",
+                      borderRadius: "16px",
+                      padding: "8px",
+                      minWidth: "200px",
+                      boxShadow: "0 16px 48px rgba(0,0,0,0.5)",
+                      animation: "slideDown 0.2s ease",
+                      zIndex: 200,
+                    }}>
+                      {/* User info */}
+                      <div style={{ padding: "12px 14px 10px", borderBottom: "1px solid #27272a", marginBottom: "6px" }}>
+                        <p style={{ color: "#fff", fontSize: "14px", fontWeight: 600, margin: "0 0 2px" }}>{user.fullname}</p>
+                        <p style={{ color: "#52525b", fontSize: "12px", margin: 0 }}>{user.email}</p>
+                      </div>
+
+                      {/* Links */}
+                      {[
+                        { label: "My Bookings", icon: <BookmarkIcon />, onClick: () => { navigate("/my-bookings"); setDropOpen(false); } },
+                      ].map(({ label, icon, onClick }) => (
+                        <button
+                          key={label}
+                          onClick={onClick}
+                          style={{
+                            width: "100%", display: "flex", alignItems: "center", gap: "10px",
+                            padding: "10px 14px", borderRadius: "10px",
+                            background: "none", border: "none", cursor: "pointer",
+                            color: "#a1a1aa", fontSize: "13px", fontWeight: 500,
+                            fontFamily: "inherit", textAlign: "left",
+                            transition: "background 0.15s, color 0.15s",
+                          }}
+                          onMouseEnter={e => { e.currentTarget.style.background = "#1a1a1f"; e.currentTarget.style.color = "#fff"; }}
+                          onMouseLeave={e => { e.currentTarget.style.background = "none"; e.currentTarget.style.color = "#a1a1aa"; }}
+                        >
+                          {icon} {label}
+                        </button>
+                      ))}
+
+                      <div style={{ borderTop: "1px solid #27272a", marginTop: "6px", paddingTop: "6px" }}>
+                        <button
+                          onClick={handleLogout}
+                          style={{
+                            width: "100%", display: "flex", alignItems: "center", gap: "10px",
+                            padding: "10px 14px", borderRadius: "10px",
+                            background: "none", border: "none", cursor: "pointer",
+                            color: "#ef4444", fontSize: "13px", fontWeight: 600,
+                            fontFamily: "inherit", textAlign: "left",
+                            transition: "background 0.15s",
+                          }}
+                          onMouseEnter={e => e.currentTarget.style.background = "rgba(239,68,68,0.08)"}
+                          onMouseLeave={e => e.currentTarget.style.background = "none"}
+                        >
+                          <LogoutIcon /> Logout
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                /* Login / Register buttons */
+                <div style={{ display: "flex", gap: "8px" }}>
+                  <Link
+                    to="/login"
+                    style={{
+                      padding: "9px 18px",
+                      borderRadius: "12px",
+                      background: "transparent",
+                      border: "1px solid #27272a",
+                      color: "#a1a1aa",
+                      fontSize: "13px",
+                      fontWeight: 600,
+                      textDecoration: "none",
+                      transition: "all 0.2s",
+                      display: "flex", alignItems: "center", gap: "6px",
+                    }}
+                    onMouseEnter={e => { e.currentTarget.style.borderColor = "#3f3f46"; e.currentTarget.style.color = "#fff"; }}
+                    onMouseLeave={e => { e.currentTarget.style.borderColor = "#27272a"; e.currentTarget.style.color = "#a1a1aa"; }}
+                  >
+                    <UserCircleIcon /> Login
+                  </Link>
+                  <Link
+                    to="/register"
+                    style={{
+                      padding: "9px 18px",
+                      borderRadius: "12px",
+                      background: "linear-gradient(135deg, #d4af37, #f0c960)",
+                      border: "none",
+                      color: "#0b0c10",
+                      fontSize: "13px",
+                      fontWeight: 700,
+                      textDecoration: "none",
+                      boxShadow: "0 4px 16px rgba(212,175,55,0.28)",
+                      transition: "opacity 0.2s",
+                    }}
+                    onMouseEnter={e => e.currentTarget.style.opacity = "0.88"}
+                    onMouseLeave={e => e.currentTarget.style.opacity = "1"}
+                  >
+                    Get Started
+                  </Link>
+                </div>
+              )}
+            </div>
 
             {/* ── Hamburger (mobile) ── */}
             <button
@@ -413,6 +415,14 @@ const UserNavbar = () => {
             animation: "slideDown 0.2s ease",
           }}>
             <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+              
+              {user && (
+                <div style={{ padding: "4px 8px 16px", borderBottom: "1px solid #27272a", marginBottom: "8px" }}>
+                  <p style={{ color: "#fff", fontSize: "15px", fontWeight: 600, margin: "0 0 2px" }}>{user.fullname}</p>
+                  <p style={{ color: "#52525b", fontSize: "12px", margin: 0 }}>{user.email}</p>
+                </div>
+              )}
+
               {navLinks.map(({ to, label, icon }) => (
                 <NavLink
                   key={to}
@@ -463,6 +473,7 @@ const UserNavbar = () => {
       <style>{`
         @media (max-width: 768px) {
           .desktop-nav { display: none !important; }
+          .desktop-user-actions { display: none !important; }
           #hamburger-btn { display: flex !important; }
         }
       `}</style>

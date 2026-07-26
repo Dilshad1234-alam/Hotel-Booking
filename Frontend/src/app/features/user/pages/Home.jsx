@@ -203,9 +203,19 @@ const Home = () => {
             grid-template-columns: 1fr;
             text-align: center;
           }
-          .hero-grid .search-container {
-            justify-content: center;
-          }
+          .search-bar-wrap { justify-content: center !important; flex-direction: column; }
+          .search-input-wrap, .search-btn { width: 100% !important; }
+          .quick-links-wrap { justify-content: center !important; }
+          .hero-desc { margin: 0 auto 36px !important; }
+        }
+        @media (max-width: 768px) {
+          .hero-grid { padding: 100px 16px 60px !important; gap: 40px !important; }
+          .stat-grid { grid-template-columns: 1fr 1fr !important; }
+          .feature-grid { grid-template-columns: 1fr !important; }
+          .banner-box { flex-direction: column; text-align: center; justify-content: center !important; }
+          .banner-title { font-size: 2rem !important; }
+          .footer-box { flex-direction: column; text-align: center; gap: 20px !important; }
+          .footer-links { flex-direction: column; gap: 12px !important; }
         }
       `}</style>
 
@@ -255,12 +265,12 @@ const Home = () => {
               Discover Stays Made for Luxury & Peace
             </h1>
 
-            <p style={{ color: "#71717a", fontSize: "16px", lineHeight: 1.75, margin: "0 0 36px", maxWidth: "480px" }}>
+            <p className="hero-desc" style={{ color: "#71717a", fontSize: "16px", lineHeight: 1.75, margin: "0 0 36px", maxWidth: "480px" }}>
               Explore handpicked hotels, premium rooms, and seamless booking — all in one beautifully crafted experience with <strong style={{ color: "#d4af37" }}>BookMyStay</strong>.
             </p>
 
             {/* Search Bar */}
-            <div style={{
+            <div className="search-bar-wrap" style={{
               background: "rgba(17,18,22,0.9)",
               backdropFilter: "blur(20px)",
               border: "1px solid #27272a",
@@ -271,7 +281,7 @@ const Home = () => {
               flexWrap: "wrap",
               boxShadow: "0 20px 60px rgba(0,0,0,0.4)",
             }}>
-              <div style={{ flex: 1, minWidth: "160px", display: "flex", alignItems: "center", gap: "10px", background: "#0b0c10", border: "1px solid #27272a", borderRadius: "12px", padding: "12px 14px" }}>
+              <div className="search-input-wrap" style={{ flex: 1, minWidth: "160px", display: "flex", alignItems: "center", gap: "10px", background: "#0b0c10", border: "1px solid #27272a", borderRadius: "12px", padding: "12px 14px" }}>
                 <span style={{ color: "#52525b", flexShrink: 0 }}><MapPinIcon /></span>
                 <input
                   type="text"
@@ -284,6 +294,7 @@ const Home = () => {
               </div>
 
               <button
+                className="search-btn"
                 onClick={handleSearch}
                 style={{
                   background: "linear-gradient(135deg, #d4af37, #f0c960)",
@@ -296,10 +307,11 @@ const Home = () => {
                   cursor: "pointer",
                   display: "flex",
                   alignItems: "center",
+                  justifyContent: "center",
                   gap: "8px",
                   fontFamily: "inherit",
-                  boxShadow: "0 4px 20px rgba(212,175,55,0.35)",
-                  transition: "opacity 0.2s",
+                  boxShadow: "0 4px 14px rgba(212,175,55,0.25)",
+                  transition: "transform 0.2s, opacity 0.2s",
                   whiteSpace: "nowrap",
                 }}
                 onMouseEnter={e => e.currentTarget.style.opacity = "0.88"}
@@ -311,7 +323,7 @@ const Home = () => {
             </div>
 
             {/* Quick links */}
-            <div style={{ display: "flex", gap: "12px", marginTop: "20px", flexWrap: "wrap" }}>
+            <div className="quick-links-wrap" style={{ display: "flex", gap: "12px", marginTop: "20px", flexWrap: "wrap" }}>
               {["Mumbai", "Delhi", "Goa", "Jaipur"].map(city => (
                 <button
                   key={city}
@@ -409,7 +421,7 @@ const Home = () => {
       {/* STATS BAR                                                    */}
       {/* ════════════════════════════════════════════════════════════ */}
       <div style={{ borderTop: "1px solid #27272a", borderBottom: "1px solid #27272a", background: "#111216" }}>
-        <div style={{ maxWidth: "1280px", margin: "0 auto", padding: "0 24px", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))" }}>
+        <div className="stat-grid" style={{ maxWidth: "1280px", margin: "0 auto", padding: "0 24px", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))" }}>
           {[
             { value: hotels.length || 0, suffix: "+", label: "Premium Hotels" },
             { value: 24,    suffix: "/7", label: "Support Available" },
@@ -437,7 +449,7 @@ const Home = () => {
           </p>
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "16px" }}>
+        <div className="feature-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "16px" }}>
           <FeatureCard delay={0}    color="#d4af37" icon={<StarIcon />}       title="Handpicked Hotels"    desc="Every hotel is carefully verified by our admin team for quality and luxury standards." />
           <FeatureCard delay={0.08} color="#22c55e" icon={<ShieldIcon />}     title="Secure Payments"      desc="100% safe transactions powered by Razorpay with encryption and fraud protection." />
           <FeatureCard delay={0.16} color="#60a5fa" icon={<HeadphonesIcon />} title="24/7 Guest Support"   desc="Our dedicated support team is available around the clock to assist with any queries." />
@@ -533,7 +545,7 @@ const Home = () => {
       {/* CTA BANNER                                                   */}
       {/* ════════════════════════════════════════════════════════════ */}
       <section style={{ padding: "0 24px 80px" }}>
-        <div style={{
+        <div className="banner-box" style={{
           maxWidth: "1280px", margin: "0 auto",
           background: "linear-gradient(135deg, #16131d 0%, #111216 50%, #16131d 100%)",
           border: "1px solid rgba(212,175,55,0.2)",
@@ -552,8 +564,9 @@ const Home = () => {
 
           <div>
             <p style={{ fontSize: "10px", letterSpacing: "0.35em", color: "#d4af37", fontWeight: 700, margin: "0 0 12px" }}>✦ START NOW</p>
-            <h2 style={{ fontFamily: "Georgia, serif", fontSize: "clamp(1.6rem, 3vw, 2.4rem)", color: "#fff", margin: "0 0 10px", lineHeight: 1.2 }}>
-              Ready for Your Next Luxury Stay?
+            <h2 className="banner-title" style={{ fontFamily: "Georgia, serif", fontSize: "clamp(2rem, 4vw, 3rem)", color: "#fff", margin: "0 0 16px", lineHeight: 1.15 }}>
+              Ready to Experience<br />
+              <span style={{ color: "#d4af37", fontStyle: "italic" }}>True Luxury?</span>
             </h2>
             <p style={{ color: "#71717a", fontSize: "15px", margin: 0 }}>
               Browse hotels, pick your room, and confirm in minutes.
@@ -611,12 +624,12 @@ const Home = () => {
       {/* FOOTER                                                       */}
       {/* ════════════════════════════════════════════════════════════ */}
       <footer style={{ borderTop: "1px solid #27272a", padding: "40px 24px" }}>
-        <div style={{ maxWidth: "1280px", margin: "0 auto", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "16px" }}>
+        <div className="footer-box" style={{ maxWidth: "1280px", margin: "0 auto", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "16px" }}>
           <div>
             <h3 style={{ fontFamily: "Georgia, serif", fontSize: "1.4rem", color: "#fff", margin: "0 0 4px" }}>BookMyStay</h3>
             <p style={{ color: "#52525b", fontSize: "13px", margin: 0 }}>Premium hotel booking experience.</p>
           </div>
-          <div style={{ display: "flex", gap: "24px" }}>
+          <div className="footer-links" style={{ display: "flex", gap: "24px" }}>
             {["Home", "My Bookings", "Login"].map(link => (
               <button
                 key={link}
